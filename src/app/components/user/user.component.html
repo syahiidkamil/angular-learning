@@ -1,0 +1,22 @@
+<h2>User Component</h2>
+
+@if (isLoggedIn && role == "employee") {
+    <p>Selamat Anda berhasil masuk sebagi employee</p>
+    <img alt="photo rakyat" src="https://cdn1-production-images-kly.akamaized.net/5hr_TWQYEdTF6Ewl6OYUSBpSQwM=/640x853/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/960017/original/2cd55f9c3a20be2deeb5a7201d69579c__Preskon_Raffi_-_Gigi___2__-_19_Agustus_2015_-_Wimbarsana.JPG">
+} @else if (isLoggedIn && role == "boss") {
+    <p>Selamat datang boss, berikut circle anda:</p>
+    <!-- {{ bosses | json }} -->
+    <img alt="photo boss" src="https://th.bing.com/th/id/OIP.sOlGAnJMYUIee8EiZHzH7wAAAA?rs=1&pid=ImgDetMain">
+    <ul>
+      @for (boss of bosses; track boss) {
+        <img class="image-boss" [src]="boss.imageUrl" [alt]="boss.name" [height]="boss.imgSize" [width]="boss.imgSize">
+        <li>{{ boss.name }} duit : <b>{{ boss.wealth }}</b></li>
+      }
+    </ul>
+
+    <p>Apakah duit diatas halal?</p>
+    <button [disabled]="buttonDisabled" (click)="onClickYes()">Yes</button>
+    <button (click)="onClickNo()">No</button>
+} @else {
+    <p>Maaf boss, kamu belum login, silahkan login dulu yee!</p>
+}
