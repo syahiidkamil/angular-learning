@@ -58,9 +58,11 @@
       <h1>Hello, {{ title }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
       <nav>
-        <a href="/home">Home</a>
+        <a routerLink="/login">Login</a>
         |
-        <a href="/user">User</a>
+        <a routerLink="/home">Home</a>
+        |
+        <a routerLink="/user">User</a>
       </nav>
       @defer {
         <!-- <app-user occupation="Engineer" [imageUrl]="newImageUrl" (onNotify)="getNotify($event)"/>
