@@ -24,6 +24,14 @@ export function app(): express.Express {
     maxAge: '1y'
   }));
 
+  server.get('/api/aditira-tamvan', (req, res) => {
+    res.send({
+      name: 'Aditira Tamvan',
+      age: 17,
+      wealth: 100000000000000,
+    });
+  })
+
   // All regular routes use the Angular engine
   server.get('*', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;

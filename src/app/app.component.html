@@ -57,20 +57,25 @@
       </svg>
       <h1>Hello, {{ title }}</h1>
       <p>Congratulations! Your app is running. 🎉</p>
-      <app-user></app-user> <!-- Selector User-->
-      <!-- <app-user></app-user> 
-      <app-user></app-user>  -->
+      <nav>
+        <a href="/home">Home</a>
+        |
+        <a href="/user">User</a>
+      </nav>
+      @defer {
+        <!-- <app-user occupation="Engineer" [imageUrl]="newImageUrl" (onNotify)="getNotify($event)"/>
+        <app-home /> -->
+        <router-outlet />
+      } @placeholder {
+        <p>Future comments</p>
+      } @loading (minimum 0s) {
+        <img height="50" src="https://i.stack.imgur.com/kOnzy.gif" alt="">
+      }
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
       <div class="pill-group">
-        @for (item of [
-          { title: 'Explore the Docs', link: 'https://angular.dev' },
-          { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
-          { title: 'CLI Docs', link: 'https://angular.dev/tools/cli' },
-          { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },
-          { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },
-        ]; track item.title) {
+        @for (item of items; track item.title) {
           <a
             class="pill"
             [href]="item.link"
@@ -113,7 +118,7 @@
           </svg>
         </a>
         <a
-          href="https://twitter.com/angular"
+          (click)="changeImage()"
           aria-label="Twitter"
           target="_blank"
           rel="noopener"
