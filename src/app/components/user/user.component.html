@@ -8,11 +8,11 @@
       <p>The user's name is {{occupation}}</p>
       <p>Selamat datang boss, berikut circle anda:</p>
       <!-- {{ bosses | json }} -->
-      <img (click)="sendNotify()" style="cursor: pointer;" alt="photo boss" src="https://th.bing.com/th/id/OIP.sOlGAnJMYUIee8EiZHzH7wAAAA?rs=1&pid=ImgDetMain">
+      <img (click)="sendNotify()" alt="photo boss" src="https://th.bing.com/th/id/OIP.sOlGAnJMYUIee8EiZHzH7wAAAA?rs=1&pid=ImgDetMain">
       <ul>
         @for (boss of bosses; track boss) {
           <img class="image-boss" [src]="boss.imageUrl" [alt]="boss.name" [height]="boss.imgSize" [width]="boss.imgSize">
-          <li>{{ boss.name }} duit : <b>{{ boss.wealth }}</b></li>
+          <li>{{ boss.name }} duit : <b>{{ boss.wealth | currency: 'Rp. ' : undefined : '1.0-0' }}</b></li>
         }
         <!-- <li>
           Static Image:

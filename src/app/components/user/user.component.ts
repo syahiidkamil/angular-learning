@@ -1,4 +1,4 @@
-import { JsonPipe } from '@angular/common';
+import { CurrencyPipe, JsonPipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common'
 import { Boss } from '../../interfaces/user';
@@ -7,7 +7,7 @@ import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [JsonPipe, NgOptimizedImage],
+  imports: [JsonPipe, NgOptimizedImage, CurrencyPipe],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
@@ -23,9 +23,7 @@ export class UserComponent {
   @Input() imageUrl: string = "Url boss";
   @Output() onNotify = new EventEmitter<string>();
 
-  userService = inject(UserService)
-
-  constructor() {
+  constructor(private userService: UserService) {
       this.bosses = this.userService.getBosses();
   }
 
