@@ -3,6 +3,6 @@
 
 <ul>
     @for (item of listComments; track $index) {
-        <li>{{ $index }}. {{ item.body }}</li>
+        <li>{{ $index +1 }}. {{ item.body }}</li>
     }
 </ul>

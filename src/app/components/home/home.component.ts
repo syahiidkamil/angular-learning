@@ -22,9 +22,9 @@ export class HomeComponent {
       this.countNumber++;
     }, 1000)
 
-    this.homeService.getData('2', 'Mallory_Kunze@marie.org').subscribe((data) => {
+    this.homeService.getData('3', 'Mallory_Kunze@marie.org').subscribe((data) => {
       console.log(data);
-      this.listComments = data.body as unknown as Comment[]
+      this.listComments = data as unknown as Comment[]
     })
   }
 

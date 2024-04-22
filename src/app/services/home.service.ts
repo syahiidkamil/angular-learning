@@ -1,6 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Todo } from '../interfaces/todo';
+import { Observable } from 'rxjs';
+import { Comment } from '../interfaces/comments';
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +16,23 @@ export class HomeService {
   constructor(private http: HttpClient) { 
   }
 
-  getData(postId: string, email: string) {
+  getData(postId: string, email: string): Observable<Comment[]> {
     return this.http.get<Comment[]>(this.url, {
       headers: {
         'Content-Type': 'application/json',
       },
       responseType: 'json',
-      observe: 'response' as 'response',
+      // observe: 'response' as 'response',
       params: {
         'postId' : postId,
         // 'email' : email
       }
     });
+    
+    // .pipe(
+    //   // Do Filter with rxjs
+    //   map((data) => {
+    //     return data.filter((item) => item.postId === +postId && item.email === email);
+    //   });
   }
 }

@@ -9,20 +9,16 @@
       <p>Selamat datang boss, berikut circle anda:</p>
       <!-- {{ bosses | json }} -->
       <img (click)="sendNotify()" alt="photo boss" src="https://th.bing.com/th/id/OIP.sOlGAnJMYUIee8EiZHzH7wAAAA?rs=1&pid=ImgDetMain">
-      <ul>
+      <ul *ngIf="completed">
         @for (boss of bosses; track boss) {
           <img class="image-boss" [src]="boss.imageUrl" [alt]="boss.name" [height]="boss.imgSize" [width]="boss.imgSize">
           <li>{{ boss.name }} duit : <b>{{ boss.wealth | currency: 'Rp. ' : undefined : '1.0-0' }}</b></li>
         }
-        <!-- <li>
-          Static Image:
-          <img ngSrc="./assets/look-up.jpg" alt="Angular logo" width="600" height="600" /> add fill to background container
-        </li>
-        <li>
-          Dynamic Image:
-          <img [ngSrc]="logoUrl" [alt]="logoAlt" width="600" height="600" priority/>
-        </li> -->
       </ul>
+      
+      <div *ngIf="error">
+        <p>Error Stream: {{error | json}}</p>
+      </div>
       <p>Apakah duit diatas halal?</p>
       <button [disabled]="buttonDisabled" (click)="onClickYes()">Yes</button>
       <button (click)="onClickNo()">No</button>
