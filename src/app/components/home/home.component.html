@@ -1,2 +1,8 @@
 <h2>Home Page</h2>
 <p>{{ countNumber }}</p>
+
+<ul>
+    @for (item of listComments; track $index) {
+        <li>{{ $index }}. {{ item.body }}</li>
+    }
+</ul>
