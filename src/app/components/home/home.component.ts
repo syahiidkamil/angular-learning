@@ -10,7 +10,6 @@ import { Comment } from '../../interfaces/comments';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  countNumber = 0;
   listComments: Comment[] = [];
   
   constructor(private homeService: HomeService) {
@@ -18,10 +17,6 @@ export class HomeComponent {
   }
 
   ngOnInit() {
-    setInterval(() => {
-      this.countNumber++;
-    }, 1000)
-
     this.homeService.getData('3', 'Mallory_Kunze@marie.org').subscribe((data) => {
       console.log(data);
       this.listComments = data as unknown as Comment[]

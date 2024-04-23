@@ -7,7 +7,6 @@
   } @else if (isLoggedIn && role == "boss") {
       <p>The user's name is {{occupation}}</p>
       <p>Selamat datang boss, berikut circle anda:</p>
-      <!-- {{ bosses | json }} -->
       <img (click)="sendNotify()" alt="photo boss" src="https://th.bing.com/th/id/OIP.sOlGAnJMYUIee8EiZHzH7wAAAA?rs=1&pid=ImgDetMain">
       <ul *ngIf="completed">
         @for (boss of bosses; track boss) {
@@ -17,11 +16,18 @@
       </ul>
       
       <div *ngIf="error">
-        <p>Error Stream: {{error | json}}</p>
+        <p>Error Stream: {{error.message| json}}</p>
       </div>
       <p>Apakah duit diatas halal?</p>
       <button [disabled]="buttonDisabled" (click)="onClickYes()">Yes</button>
-      <button (click)="onClickNo()">No</button>
+      <button [ngClass]="isSpecial ? 'special' : 'no-special'" (click)="onClickNo()">No</button>
+
+      <div [ngClass]="currentClasses">This div is initially saveable, unchanged, and special.</div>
+      <button (click)="setCurrentClasses()">Set Style</button>
+      <div [ngStyle]="currentStyles">
+        This div is initially italic, normal weight, and extra large (24px).
+      </div>
+      <button (click)="setCurrentStyles()">Set Style</button>
   } @else {
       <p>Maaf boss, kamu belum login, silahkan login dulu yee!</p>
   }
