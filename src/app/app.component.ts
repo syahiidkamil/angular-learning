@@ -22,7 +22,7 @@ import { TimeComponent } from './shared/components/time/time.component';
 export class AppComponent {
   title = 'Aditira';
   newImageUrl = "https://i.pinimg.com/736x/65/e2/7b/65e27b687e93c7131843ed775c6ed8f5.jpg"
-  isActive = false;
+  homeId = '454';
   constructor(private router: Router, private activeRoute: ActivatedRoute) {
     
   }
@@ -36,28 +36,17 @@ export class AppComponent {
   ]
 
   goHome() {
-    let id = '454';
-    console.log('Url:', this.router.url);
-    if (this.router.url === '/home/454') {
-      this.isActive = true;
-    }
-    console.log('Active:', this.isActive);
-    this.router.navigate(['home', id], { relativeTo: this.activeRoute });
+    this.router.navigate(['home', {id: this.homeId}], { relativeTo: this.activeRoute });
   }
 
-  withComponentInputBinding() {
-    console.log('Url:', this.router.url);
-    if (this.router.isActive('/user', true)) {
-      this.isActive = true;
-    }
+  goUser() {
     let navigationExtras: NavigationExtras = {
       state: { 
         id: '123',
         name: 'Aditira',
         address: 'Jl. Pahlawan No. 1' 
-      } // Data yang ingin Anda kirimkan
+      }
     };
-    console.log('Active:', this.isActive);
     this.router.navigate(['/user'], navigationExtras);
   }
 

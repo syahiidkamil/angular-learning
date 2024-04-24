@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { Comment } from '../../interfaces/comments';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'main-root',
@@ -17,7 +17,7 @@ export class HomeComponent {
     console.log("Id from Parent",  id);
   }
   
-  constructor(private homeService: HomeService) {
+  constructor(private homeService: HomeService, private route: ActivatedRoute) {
 
   }
 
@@ -26,6 +26,13 @@ export class HomeComponent {
       console.log(data);
       this.listComments = data as unknown as Comment[]
     })
+
+    this.route.paramMap.subscribe(
+      params => {
+        console.log(params.get('id'))
+        console.log(params.get("name"))
+      }
+    )
   }
 
 }

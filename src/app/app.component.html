@@ -51,9 +51,9 @@
       <nav>
         <button class="btn" routerLink="/login"  routerLinkActive="btn-info">Login</button>
         |
-        <button class="btn" (click)="goHome()" [class.btn-info]="isActive">Home</button >
+        <button class="btn" [routerLink]="['/home', {id: homeId}]" routerLinkActive="btn-info">Home</button >
         |
-        <button class="btn" (click)="withComponentInputBinding()" [class.btn-info]="isActive">User</button >
+        <button class="btn" (click)="goUser()" routerLinkActive="btn-info">User</button >
         |
         <button class="btn" routerLink="/time" routerLinkActive="btn-info">Time</button >
       </nav>

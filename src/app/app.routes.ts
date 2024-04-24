@@ -1,11 +1,8 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { UserComponent } from './components/user/user.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
-import { LoginComponent } from './components/login/login.component';
-import { TimeComponent } from './shared/components/time/time.component';
 import { AboutComponent } from './components/home/about/about.component';
 import { ContactComponent } from './components/home/contact/contact.component';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
@@ -16,34 +13,39 @@ export const routes: Routes = [
     {
         path: 'login',
         title: 'App Login Page',
-        component: LoginComponent
+        loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
     },
     {
-        path: 'home/:id',
+        path: 'home',
         title: 'App Home Page',
-        component: HomeComponent,
+        loadComponent: () => import("./components/home/home.component").then(m => m.HomeComponent),
+        canActivateChild: [authGuard],
         children: [
             {
               path: 'about', 
               title: 'App About Page',
-              component: AboutComponent, 
+              component: AboutComponent
             },
             {
               path: 'contact',
               title: 'App Contact Page',
-              component: ContactComponent,
+              component: ContactComponent
             },
           ],
     },
     {
         path: 'time',
         title: 'Time Page',
-        component: TimeComponent
+        loadComponent: () => import("./shared/components/time/time.component").then(m => m.TimeComponent),
+        // canLoad: [authGuard],
+        // canDeactivate: [authGuard],
+        canActivate: [authGuard]
     },
     {
         path: 'user',
         title: 'App User Page',
-        component: UserComponent
+        loadComponent: () => import('./components/user/user.component').then(m => m.UserComponent),
+        canActivate: [authGuard],
     },
     {
         path: '**',
