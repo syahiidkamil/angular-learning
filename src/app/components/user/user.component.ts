@@ -24,6 +24,8 @@ export class UserComponent {
 
   @Input() occupation: string = "Data Scientist";
   @Input() imageUrl: string = "Url boss";
+  listComments: Comment[] = [];
+  
   @Output() onNotify = new EventEmitter<string>();
 
   error!: ClientError;
@@ -32,13 +34,23 @@ export class UserComponent {
   isSpecial: boolean = false;
   canSave = true;
   isUnchanged = true;
+
+  id: string = "";
+  name: string = "";
+  address: string = "";
  
   constructor(private userService: UserService) {
-      this.userService.getBosses().subscribe({
-        next: data => this.bosses = data,
-        error: err => this.error = err,
-        complete: () => this.completed = true,
-      });
+    this.userService.getBosses().subscribe({
+      next: data => this.bosses = data,
+      error: err => this.error = err,
+      complete: () => this.completed = true,
+    });
+
+    this.id = history.state.id;
+    this.name = history.state.name;
+    this.address = history.state.address;
+
+    console.log("Data Router: ", this.id, this.name, this.address);
   }
 
   setCurrentClasses() {
@@ -73,7 +85,6 @@ export class UserComponent {
   }
 
   ngOnChanges() {
-    console.log("Ini ada yang ngubah");
     this.bosses[4].imageUrl = this.imageUrl
   }
 }

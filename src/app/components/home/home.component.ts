@@ -1,16 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { Comment } from '../../interfaces/comments';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'main-root',
   standalone: true,
-  imports: [],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
   listComments: Comment[] = [];
+  @Input()
+  set id (id: string) {
+    console.log("Id from Parent",  id);
+  }
   
   constructor(private homeService: HomeService) {
 

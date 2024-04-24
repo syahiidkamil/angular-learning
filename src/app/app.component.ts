@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute, NavigationExtras, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TimePipe } from './pipes/time.pipe';
 import { TimeComponent } from './shared/components/time/time.component';
 
@@ -9,7 +9,8 @@ import { TimeComponent } from './shared/components/time/time.component';
   standalone: true,
   imports: [
     RouterLink, 
-    RouterOutlet, 
+    RouterOutlet,
+    RouterLinkActive,
     DatePipe, 
     TimePipe, 
     CommonModule,
@@ -19,8 +20,12 @@ import { TimeComponent } from './shared/components/time/time.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Aditira Tamvan';
+  title = 'Aditira';
   newImageUrl = "https://i.pinimg.com/736x/65/e2/7b/65e27b687e93c7131843ed775c6ed8f5.jpg"
+  isActive = false;
+  constructor(private router: Router, private activeRoute: ActivatedRoute) {
+    
+  }
 
   items = [
     { title: 'Explore the Docs', link: 'https://angular.dev' },
@@ -29,6 +34,32 @@ export class AppComponent {
     { title: 'Angular Language Service', link: 'https://angular.dev/tools/language-service' },
     { title: 'Angular DevTools', link: 'https://angular.dev/tools/devtools' },
   ]
+
+  goHome() {
+    let id = '454';
+    console.log('Url:', this.router.url);
+    if (this.router.url === '/home/454') {
+      this.isActive = true;
+    }
+    console.log('Active:', this.isActive);
+    this.router.navigate(['home', id], { relativeTo: this.activeRoute });
+  }
+
+  withComponentInputBinding() {
+    console.log('Url:', this.router.url);
+    if (this.router.isActive('/user', true)) {
+      this.isActive = true;
+    }
+    let navigationExtras: NavigationExtras = {
+      state: { 
+        id: '123',
+        name: 'Aditira',
+        address: 'Jl. Pahlawan No. 1' 
+      } // Data yang ingin Anda kirimkan
+    };
+    console.log('Active:', this.isActive);
+    this.router.navigate(['/user'], navigationExtras);
+  }
 
   ngOnInit() {
 

@@ -4,6 +4,8 @@ import { UserComponent } from './components/user/user.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { LoginComponent } from './components/login/login.component';
 import { TimeComponent } from './shared/components/time/time.component';
+import { AboutComponent } from './components/home/about/about.component';
+import { ContactComponent } from './components/home/contact/contact.component';
 
 export const routes: Routes = [
     {
@@ -17,9 +19,21 @@ export const routes: Routes = [
         component: LoginComponent
     },
     {
-        path: 'home',
+        path: 'home/:id',
         title: 'App Home Page',
         component: HomeComponent,
+        children: [
+            {
+              path: 'about', 
+              title: 'App About Page',
+              component: AboutComponent, 
+            },
+            {
+              path: 'contact',
+              title: 'App Contact Page',
+              component: ContactComponent,
+            },
+          ],
     },
     {
         path: 'time',

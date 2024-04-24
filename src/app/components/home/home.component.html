@@ -5,3 +5,13 @@
         <li>{{ $index +1 }}. {{ item.body }}</li>
     }
 </ul>
+
+<nav>
+    <ul>
+      <li><a routerLink="about">Child A</a></li>
+      <li><a routerLink="contact">Child B</a></li>
+      <li><a routerLink="../../time">Time Parent</a></li>
+    </ul>
+</nav>
+
+<router-outlet></router-outlet>
