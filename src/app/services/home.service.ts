@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { Todo } from '../interfaces/todo';
 import { Observable } from 'rxjs';
 import { Comment } from '../interfaces/comments';
+import { BASE_URL } from '../shared/constant/base.url';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
-  url = 'https://jsonplaceholder.typicode.com/comments';
+  url = environment.apiUrl + '/comments';
   // baseParams = new HttpParams()
   //   .set('postId', '2')
   //   .set('email', 'Mallory_Kunze@marie.org');

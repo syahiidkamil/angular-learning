@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { Boss } from '../interfaces/user';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  url = 'http://localhost:4201/api/bosses';
+  url = environment.apiUrl;
 
   bosses: Boss[] = []
 

@@ -1,5 +1,5 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, isDevMode } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TimePipe } from './pipes/time.pipe';
 import { TimeComponent } from './shared/components/time/time.component';
@@ -27,6 +27,14 @@ export class AppComponent {
     
   }
 
+  ngOnInit() {
+    if (isDevMode()) {
+      console.log('Development!');
+    } else {
+      console.log('Production!');
+    }
+  }
+
   items = [
     { title: 'Explore the Docs', link: 'https://angular.dev' },
     { title: 'Learn with Tutorials', link: 'https://angular.dev/tutorials' },
@@ -48,10 +56,6 @@ export class AppComponent {
       }
     };
     this.router.navigate(['/user'], navigationExtras);
-  }
-
-  ngOnInit() {
-
   }
 
   changeImage() {
