@@ -2,3 +2,18 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-grid-tile-content {
+    top: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    display: flex;
+    align-items: right;
+    justify-content: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
