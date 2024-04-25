@@ -4,7 +4,7 @@ import { Todo } from '../interfaces/todo';
 import { Observable } from 'rxjs';
 import { Comment } from '../interfaces/comments';
 import { BASE_URL } from '../shared/constant/base.url';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.dev';
 
 @Injectable({
   providedIn: 'root'

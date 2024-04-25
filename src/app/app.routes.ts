@@ -48,6 +48,11 @@ export const routes: Routes = [
         canActivate: [authGuard],
     },
     {
+        path: 'directive',
+        title: 'Directive Page',
+        loadComponent: () => import('./components/directive/directive.component').then(m => m.DirectiveComponent),
+    },
+    {
         path: '**',
         title: 'Page Not Found',
         component: NotfoundComponent

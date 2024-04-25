@@ -1,0 +1,31 @@
+<h2>Directive Page</h2>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <p>Side Navigation</p>
+    @if (showFiller) {
+      <p>Lorem, ipsum dolor sit amet consectetur.</p>
+    }
+   
+    <mat-list>
+      <mat-list-item *ngFor="let item of menus"> 
+        <button mat-fab extended color="accent" *ngIf="item.name!='Dashboard'" routerLink="{{item.url}}" disabled="{{item.disabled}}">
+          <mat-icon>{{item.icon}}</mat-icon>
+          {{item.name}}
+        </button>
+      </mat-list-item>
+     </mat-list>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      Toggle sidenav
+    </button>
+
+    <div [ngSwitch]="'home'">
+      <div *ngSwitchCase="'home'">home</div>
+      <div *ngSwitchDefault>Ah Here we go Again!</div>
+    </div>
+  </div>
+
+</mat-drawer-container>

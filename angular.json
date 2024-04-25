@@ -65,8 +65,19 @@
               "sourceMap": true,
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
+                  "replace": "src/environments/environment.prod.ts",
                   "with": "src/environments/environment.dev.ts"
+                }
+              ]
+            },
+            "staging": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.prod.ts",
+                  "with": "src/environments/environment.stage.ts"
                 }
               ]
             }
@@ -81,6 +92,9 @@
             },
             "development": {
               "buildTarget": "my-app:build:development"
+            },
+            "staging": {
+              "buildTarget": "my-app:build:staging"
             }
           },
           "defaultConfiguration": "development",

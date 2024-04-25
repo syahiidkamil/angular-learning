@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, interval, map } from 'rxjs';
 import { BASE_URL } from '../shared/constant/base.url';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.dev';
 
 @Injectable({
   providedIn: 'root'

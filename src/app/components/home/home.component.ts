@@ -4,7 +4,7 @@ import { Comment } from '../../interfaces/comments';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'main-root',
+  selector: 'home-page',
   standalone: true,
   imports: [RouterOutlet, RouterLink],
   templateUrl: './home.component.html',
