@@ -3,6 +3,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AboutComponent } from './components/home/about/about.component';
 import { ContactComponent } from './components/home/contact/contact.component';
 import { authGuard } from './guards/auth.guard';
+import { SignalComponent } from './components/home/signal/signal.component';
 
 export const routes: Routes = [
     {
@@ -31,12 +32,17 @@ export const routes: Routes = [
               title: 'App Contact Page',
               component: ContactComponent
             },
+            {
+                path: 'signal',
+                title: 'App Signal Page',
+                component: SignalComponent
+            },
           ],
     },
     {
         path: 'time',
         title: 'Time Page',
-        loadComponent: () => import("./shared/components/time/time.component").then(m => m.TimeComponent),
+        loadComponent: () => import("./components/time/time.component").then(m => m.TimeComponent),
         // canLoad: [authGuard],
         // canDeactivate: [authGuard],
         canActivate: [authGuard]

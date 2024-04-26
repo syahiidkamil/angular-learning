@@ -43,7 +43,6 @@
 
             <h2 [appHighlight]="color" [aditira]="'Halo Aditira'">Welcome to the party!</h2>
 
-
             <p>Use ngNonBindable to stop evaluation.</p>
             <p >This should not evaluate: {{ angka }}</p>
 
@@ -51,7 +50,21 @@
             <div ngNonBindable [appHighlight]="'yellow'">This should not evaluate: {{ 1 + 1 }}, but will highlight yellow.</div>
           </div>
           <div *ngSwitchCase="'Contact'">
-            <h2>Contact Page</h2>
+
+            <h2 [ngClass]="contactClass">Contact Page</h2>
+
+            <div [ngClass]="currentClasses">
+              <p>Teletubies</p>
+            </div>
+            
+            <mat-radio-group [(ngModel)]="radioValue" aria-label="Select an option" (change)="onRadioChange($event)">
+              <mat-radio-button value="tingkiwingky">Option 1</mat-radio-button>
+              <mat-radio-button value="dipsi">Option 2</mat-radio-button>
+              <mat-radio-button value="lala">Option 3</mat-radio-button>
+            </mat-radio-group>
+
+            <p>{{ radioValue }}</p>
+
           </div>
           <div *ngSwitchCase="'Service'">
             <h2>Service Page</h2>

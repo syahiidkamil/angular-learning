@@ -21,5 +21,5 @@ export const authGuard: CanActivateFn = (route, state) => {
 
 function checkAuthentication()  {
   // logic here to get authentication
-  return false
+  return true
 }

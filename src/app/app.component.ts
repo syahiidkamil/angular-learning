@@ -2,7 +2,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { Component, inject, isDevMode } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TimePipe } from './pipes/time.pipe';
-import { TimeComponent } from './shared/components/time/time.component';
+import { TimeComponent } from './components/time/time.component';
 
 @Component({
   selector: 'main-root',

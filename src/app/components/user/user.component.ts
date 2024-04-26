@@ -1,5 +1,5 @@
 import { CurrencyPipe, JsonPipe, NgClass, NgIf, NgStyle } from '@angular/common';
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common'
 import { Boss } from '../../interfaces/user';
 import { UserService } from '../../services/user.service';
@@ -12,7 +12,7 @@ import { ClientError } from '../../interfaces/client.error';
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })
-export class UserComponent {
+export class UserComponent{
   isLoggedIn = true;
   role = "boss";
   buttonDisabled = false;

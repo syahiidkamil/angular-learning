@@ -1,1 +1,6 @@
 <p>about works!</p>
+
+<input type="text" #nameInput>
+<button (click)="name = nameInput.value">Input Name: {{name}}</button>
+
+<app-contact [name]="name" (nameOut)="getMessage($event)"></app-contact>

@@ -10,6 +10,8 @@ import { HomeComponent } from '../home/home.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { Tile } from '../../interfaces/layout';
 import { HighlightDirective } from '../../directives/highlight.directive';
+import {MatRadioChange, MatRadioModule} from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -24,18 +26,56 @@ import { HighlightDirective } from '../../directives/highlight.directive';
     MatIconModule,
     MatDividerModule,
     MatGridListModule,
+    MatIconModule,
+    MatRadioModule,
     CommonModule,
     HomeComponent,
+    FormsModule,
     HighlightDirective
   ],
   templateUrl: './directive.component.html',
   styleUrl: './directive.component.scss'
 })
 export class DirectiveComponent {
+  currentClasses: Record<string, boolean> = {};
+  onRadioChange($event: MatRadioChange) {
+    console.log("Radio:", $event)
+    switch ($event.value) {
+      case "tingkiwingky":
+        this.currentClasses = {
+          'color-purple': true,
+          'shape-3': true
+        }
+        break;
+      case "dipsi":
+        this.currentClasses = {
+          'color-green': true,
+          'shape-2': true
+        }
+        break;
+      case "lala":
+        this.currentClasses = {
+          'color-yellow': true,
+          'shape-1': true
+        }
+        break;
+      default:
+        this.currentClasses = {
+          'wakwaw': true,
+        }
+        break;
+    }
+  }
   color: string = 'green';
-angka: string = '{{ angka }}';
+  angka: string = '{{ angka }}';
+  contactClass: string = "contact";
+  radioValue!: string;
   onScroll($event: Event) {
     console.log($event);
+  }
+  onClick() {
+    console.log("Mouse Over");
+    this.contactClass = "contact-active";
   }
   showFiller = false;
   currentPage: string = "Home";
@@ -74,8 +114,6 @@ angka: string = '{{ angka }}';
     }
   ]
   classHeader: string = "title";
-
-  currentClasses: Record<string, boolean> = {};
   currentStyles: Record<string, string> = {};
   ngOnInit() {
     this.setCurrentClasses();

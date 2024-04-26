@@ -26,3 +26,56 @@
   .title-clicked {
     color: blue;
   }
+
+.contact-active {
+  color: red;
+}
+
+.contact {
+  color: blue;
+}
+
+.contact-size {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.contact-italic {
+  font-style: italic;
+}
+
+.color-yellow {
+  color: yellow;
+}
+
+.color-green {
+  color: green;
+}
+
+.color-purple {
+  color: purple;
+}
+
+.shape-1 {
+  border: 2px solid yellow;
+  border-radius: 20px 0px 20px 0px;
+  text-align: center;
+  height: auto;
+  width: auto;
+}
+
+.shape-2 {
+  border: 2px solid green;
+  border-radius: 0px 20px 20px 0px;
+  text-align: center;
+  height: auto;
+  width: auto;
+}
+
+.shape-3 {
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 100px solid purple;
+}
+
+
