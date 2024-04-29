@@ -1,4 +1,30 @@
-<h3>Signals</h3>
+<h3>Coffe Shop - Avan</h3>
 
+<div>
+    <h4>Menu:</h4>
+    <ol class="list-group list-group-numbered">
+        <li *ngFor="let item of coffees" class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">{{ item.name }}</div>
+                <p>{{ item.price }}</p>
+                <button [ngClass]="{'disabled btn-danger': item.stock == 0}" class="btn btn-primary btn-sm" (click)="addCart(item)">☕️</button>
+            </div>
+            <span [ngClass]="{'bg-danger': item.stock == 0}" class="badge text-bg-primary rounded-pill">stock: {{ item.stock }}</span>
+        </li>
+    </ol>
+    <h4>Cart:</h4>
+    <ol class="list-group list-group-numbered">
+        <li *ngFor="let item of cartCoffees; let i = index" class="list-group-item d-flex justify-content-between align-items-start">
+            <div class="ms-2 me-auto">
+                <div class="fw-bold">{{ item.name }}</div>
+                <p>{{ item.price }}</p>
+            </div>
+            <label for="exampleDataList" class="form-label">Quantity:</label>
+            <input (change)="changeQuantity(i, item.id, quantity.value)" type="number" style="width: 80px; margin-left: 10px;" [min]="1" max="{{ item.stock }}" [ngModel]="item.quantity" class="form-control form-control-sm" #quantity>
+        </li>
+    </ol>
 
-<button (click)="calculateNumber()">Do Calculate</button>
+    <p>Total Price: {{ totalPrice() }}</p>
+
+    <button (click)="buy()">Buy</button>
+</div>
