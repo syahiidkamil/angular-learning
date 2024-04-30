@@ -16,6 +16,8 @@ import { authInterceptor } from './interceptors/auth.interceptor';
 import { conditionalInterceptor } from './interceptors/conditional.interceptor';
 import { ClassLoggingInterceptor } from './interceptors/class-logging.interceptor';
 import { ClassLogging2Interceptor } from './interceptors/class-logging-2.interceptor';
+import { cancelSameApiRequestsInterceptor } from './interceptors/cancel-same-api-requests.interceptor';
+import { retryInterceptor } from './interceptors/retry.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,7 +28,9 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([
         loggingInterceptor,
         authInterceptor,
+        retryInterceptor,
         conditionalInterceptor,
+        cancelSameApiRequestsInterceptor,
       ]),
       withInterceptorsFromDi()
     ),
