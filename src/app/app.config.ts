@@ -3,16 +3,38 @@ import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { loggingInterceptor } from './interceptors/logging.interceptor';
+import { authInterceptor } from './interceptors/auth.interceptor';
+import { conditionalInterceptor } from './interceptors/conditional.interceptor';
+import { ClassLoggingInterceptor } from './interceptors/class-logging.interceptor';
+import { ClassLogging2Interceptor } from './interceptors/class-logging-2.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes, withComponentInputBinding()), 
+    provideRouter(routes, withComponentInputBinding()),
     provideClientHydration(),
     provideHttpClient(
-      withFetch()
-    ), 
-    provideAnimationsAsync()
-  ]
+      withFetch(),
+      withInterceptors([
+        loggingInterceptor,
+        authInterceptor,
+        conditionalInterceptor,
+      ]),
+      withInterceptorsFromDi()
+    ),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ClassLoggingInterceptor,
+      multi: true,
+    },
+    provideAnimationsAsync(),
+  ],
 };

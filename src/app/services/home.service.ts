@@ -1,13 +1,17 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Todo } from '../interfaces/todo';
 import { Observable } from 'rxjs';
 import { Comment } from '../interfaces/comments';
 import { BASE_URL } from '../shared/constant/base.url';
 import { environment } from '../../environments/environment.dev';
+import { BYPASS_LOGGING } from '../shared/constant/context.constants';
+
+const JWT_TOKEN_DUMMY =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFuZ3VsYXIiLCJpYXQiOjE1MTYyMzkwMjIsImV4cCI6MjUxNjIzOTAyMn0.SLoP03tbQ_14HuxjyB8cMQBbAWkd9cT6qu1GyJx221g';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HomeService {
   url = environment.apiUrl + '/comments';
@@ -15,7 +19,10 @@ export class HomeService {
   //   .set('postId', '2')
   //   .set('email', 'Mallory_Kunze@marie.org');
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {}
+
+  getAuthToken() {
+    return `Bearer ${JWT_TOKEN_DUMMY}`;
   }
 
   getData(postId: string, email: string): Observable<Comment[]> {
@@ -26,11 +33,13 @@ export class HomeService {
       responseType: 'json',
       // observe: 'response' as 'response',
       params: {
-        'postId' : postId,
+        postId: postId,
         // 'email' : email
-      }
+      },
+      // BYPASS_LOGGING
+      context: new HttpContext().set(BYPASS_LOGGING, true),
     });
-    
+
     // .pipe(
     //   // Do Filter with rxjs
     //   map((data) => {
