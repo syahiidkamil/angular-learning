@@ -23,6 +23,11 @@ export const routes: Routes = [
         canActivateChild: [authGuard],
         children: [
             {
+                path: '',
+                redirectTo: 'about',
+                pathMatch: 'full'
+            },
+            {
               path: 'about', 
               title: 'App About Page',
               component: AboutComponent

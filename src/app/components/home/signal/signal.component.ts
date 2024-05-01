@@ -1,5 +1,5 @@
 import { Component, computed, effect, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 export interface Coffee {
@@ -9,18 +9,24 @@ export interface Coffee {
   stock: number;
 }
 
-export interface CoffeeCart {
+export interface CoffeeCart extends Coffee {
+  quantity: number;
+  totalPrice: number;
+  initialStock: number;
+}
+
+
+export interface User {
   id: number;
   name: string;
-  price: number;
-  stock: number;
-  quantity: number;
+  carts: CoffeeCart[]
 }
+
 
 @Component({
   selector: 'app-signal',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule],
   templateUrl: './signal.component.html',
   styleUrl: './signal.component.scss'
 })
@@ -54,15 +60,9 @@ export class SignalComponent {
 
   cartCoffees: CoffeeCart[] = [];
 
-  quantity = signal<number>(1);
-  selectedCoffee = signal<Coffee>(this.coffees[0]);
-  numbers = [1, 2, 3, 4, 5];
+  totalPrice: number = 0;
 
-  totalPrice = computed(() => {
-    return this.quantity() * this.selectedCoffee().price
-  })
-
-  addCart(coffee: Coffee) {
+  addCart(indexCoffee: number, coffee: Coffee) {
     // Check stock
     if (coffee.stock == 0) {
       alert('Out of Stock');
@@ -70,7 +70,7 @@ export class SignalComponent {
     }
 
     // Create new coffee
-    let newCooffee = {...coffee, quantity: 1};
+    let newCooffee = { ...coffee, quantity: 1, totalPrice: coffee.price, initialStock: coffee.stock };
 
 
     // Check if already in cart
@@ -81,26 +81,50 @@ export class SignalComponent {
 
     // Add to cart
     this.cartCoffees.push(newCooffee);
+
+    // Reduce stock
+    this.coffees[indexCoffee].stock -= 1
+
+    // Calculate total
+    this.totalPrice = this.cartCoffees.reduce((a, b) => a + b.totalPrice, 0)
   }
 
-  changeQuantity(index: number, idCart: number, quantity: string) {
-    this.cartCoffees[index].quantity = Number(quantity);
-    // this.coffees[].stock = 0
+  changeQuantity(index: number, idCart: number, value: string) {
+    let quantity = Number(value);
 
-    console.log(this.cartCoffees);
+    // Check if quantity is below 1, then set to 1
+    if (quantity < 1) {
+      quantity = 1;
+    }
+
+    // Check if quantity is over stock, then set to stock amount
+    let indexCoffee = this.coffees.findIndex(x => x.id == idCart);
+    if (quantity > this.cartCoffees[index].initialStock) {
+      quantity = this.cartCoffees[index].initialStock;
+    }
+
+    // Change quantity
+    this.cartCoffees[index].quantity = quantity;
+    this.cartCoffees[index].totalPrice = quantity * this.coffees[indexCoffee].price;
+    this.coffees[indexCoffee].stock = this.cartCoffees[index].initialStock - quantity;
+
+    // Calculate total
+    this.totalPrice = this.cartCoffees.reduce((a, b) => a + b.totalPrice, 0)
   }
 
+  removeCart(index: number, coffee: CoffeeCart) {
+    // Remove from cart
+    this.cartCoffees.splice(index, 1);
+    // Increase stock
+    this.coffees[coffee.id - 1].stock += coffee.quantity
+  }
 
   constructor() {
-      
+
   }
 
   ngOnInit() {
-    
-  }
-
-  buy() {
 
   }
-  
+
 }

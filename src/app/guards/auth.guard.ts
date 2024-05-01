@@ -5,9 +5,6 @@ export const authGuard: CanActivateFn = (route, state) => {
   const routeMod = inject(Router)
   const isAuthenticated = checkAuthentication();
 
-  console.log("route:", route)
-  console.log("state:", state)
-
   if (state.url === '/home/about') {
     return true
   }
