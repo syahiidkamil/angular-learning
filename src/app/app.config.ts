@@ -18,6 +18,7 @@ import { ClassLoggingInterceptor } from './interceptors/class-logging.intercepto
 import { ClassLogging2Interceptor } from './interceptors/class-logging-2.interceptor';
 import { cancelSameApiRequestsInterceptor } from './interceptors/cancel-same-api-requests.interceptor';
 import { retryInterceptor } from './interceptors/retry.interceptor';
+import { simpleCacheInterceptor } from './interceptors/simple-cache.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,6 +32,7 @@ export const appConfig: ApplicationConfig = {
         retryInterceptor,
         conditionalInterceptor,
         cancelSameApiRequestsInterceptor,
+        simpleCacheInterceptor,
       ]),
       withInterceptorsFromDi()
     ),

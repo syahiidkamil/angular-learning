@@ -1,7 +1,7 @@
 import { HttpClient, HttpContext, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Todo } from '../interfaces/todo';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Comment } from '../interfaces/comments';
 import { BASE_URL } from '../shared/constant/base.url';
 import { environment } from '../../environments/environment.dev';
@@ -15,6 +15,7 @@ const JWT_TOKEN_DUMMY =
 })
 export class HomeService {
   url = environment.apiUrl + '/comments';
+  accessToken = `Bearer ${JWT_TOKEN_DUMMY}`; // alternatif dari local storage
   // baseParams = new HttpParams()
   //   .set('postId', '2')
   //   .set('email', 'Mallory_Kunze@marie.org');
@@ -22,7 +23,15 @@ export class HomeService {
   constructor(private http: HttpClient) {}
 
   getAuthToken() {
-    return `Bearer ${JWT_TOKEN_DUMMY}`;
+    return this.accessToken;
+  }
+
+  getRefreshedAuthToken(): Observable<string> {
+    return of(`Bearer new_${JWT_TOKEN_DUMMY}`);
+  }
+
+  setAccessToken(accessToken: string) {
+    this.accessToken = accessToken;
   }
 
   getData(postId: string, email: string): Observable<Comment[]> {

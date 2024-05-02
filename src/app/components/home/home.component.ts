@@ -15,7 +15,7 @@ export class HomeComponent {
     this.homeService
       .getData('3', 'Mallory_Kunze@marie.org')
       .subscribe((data) => {
-        console.log(data);
+        console.log('test', data);
         this.listComments = data as unknown as Comment[];
       });
 
