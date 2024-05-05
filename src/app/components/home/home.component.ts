@@ -8,31 +8,31 @@ import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet, RouterLink],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   listComments: Comment[] = [];
   @Input()
-  set id (id: string) {
-    console.log("Id from Parent",  id);
+  set id(id: string) {
+    console.log('Id from Parent', id);
   }
-  
-  constructor(private homeService: HomeService, private route: ActivatedRoute) {
 
-  }
+  constructor(
+    private homeService: HomeService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.homeService.getData('3', 'Mallory_Kunze@marie.org').subscribe((data) => {
-      console.log(data);
-      this.listComments = data as unknown as Comment[]
-    })
+    this.homeService
+      .getData('3', 'Mallory_Kunze@marie.org')
+      .subscribe((data) => {
+        console.log(data);
+        this.listComments = data as unknown as Comment[];
+      });
 
-    this.route.paramMap.subscribe(
-      params => {
-        console.log(params.get('id'))
-        console.log(params.get("name"))
-      }
-    )
+    this.route.paramMap.subscribe((params) => {
+      console.log(params.get('id'));
+      console.log(params.get('name'));
+    });
   }
-
 }
